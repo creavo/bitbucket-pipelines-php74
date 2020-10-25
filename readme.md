@@ -8,7 +8,8 @@
 
 - `php7.4-zip`, `php7.4-xml`, `php7.4-mbstring`, `php7.4-curl`, `php7.4-json`, `php7.4-imap`, `php7.4-mysql`, `php7.4-tokenizer`, `php7.4-xdebug`, `php7.4-intl`, `php7.4-soap`, `php7.4-pdo`, `php7.4-cli`, `php7.4-gd`, `php7.4-gmp` and `php-imagick`
 - wget, curl, unzip
-- Composer
+- Composer 2
+- Phive
 - Mysql 5.7
 - Redis-Server
 - NPM
@@ -22,6 +23,8 @@ pipelines:
   default:
     - step:
         script:
+          - composer self-update
+          - phive self-update
           - service mysql start
           - mysql -h localhost -u root -proot -e "CREATE DATABASE test;"
           - composer install --no-interaction --no-progress --prefer-dist
