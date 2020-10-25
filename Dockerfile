@@ -25,14 +25,15 @@ RUN DEBIAN_FRONTEND=noninteractive apt-get update && \
     ssh \
     locales \
     less \
-    composer \
     sudo \
     mysql-server \
     redis-server \
     npm
 
+# add yarn-dependency
 RUN curl -sS https://dl.yarnpkg.com/debian/pubkey.gpg | apt-key add - && echo "deb https://dl.yarnpkg.com/debian/ stable main" | tee /etc/apt/sources.list.d/yarn.list
 
+# install packages
 RUN DEBIAN_FRONTEND=noninteractive apt-get update && \
     DEBIAN_FRONTEND=noninteractive apt-get upgrade -y && \
     DEBIAN_FRONTEND=noninteractive apt-get dist-upgrade -y && \
@@ -40,9 +41,13 @@ RUN DEBIAN_FRONTEND=noninteractive apt-get update && \
     yarn \
     php-pear php7.4-mysql php7.4-zip php7.4-xml php7.4-mbstring php7.4-curl php7.4-json php7.4-pdo php7.4-tokenizer php7.4-cli php7.4-imap php7.4-intl php7.4-gd php7.4-xdebug php7.4-soap php7.4-gmp php-imagick \
     apache2 libapache2-mod-php7.4 \
-    --no-install-recommends && \
-    DEBIAN_FRONTEND=noninteractive composer self-update && \
-    DEBIAN_FRONTEND=noninteractive apt-get clean -y && \
+    --no-install-recommends
+
+# install composer
+RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer
+
+# final clean up
+RUN DEBIAN_FRONTEND=noninteractive apt-get clean -y && \
     DEBIAN_FRONTEND=noninteractive apt-get autoremove -y && \
     DEBIAN_FRONTEND=noninteractive apt-get autoclean -y && \
     rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/* && \
