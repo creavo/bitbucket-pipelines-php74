@@ -41,10 +41,10 @@ RUN DEBIAN_FRONTEND=noninteractive apt-get update && \
     php-pear php7.4-mysql php7.4-zip php7.4-xml php7.4-mbstring php7.4-curl php7.4-json php7.4-pdo php7.4-tokenizer php7.4-cli php7.4-imap php7.4-intl php7.4-gd php7.4-xdebug php7.4-soap php7.4-gmp php-imagick \
     apache2 libapache2-mod-php7.4 \
     --no-install-recommends && \
-    composer self-update && \
-    apt-get clean -y && \
-    apt-get autoremove -y && \
-    apt-get autoclean -y && \
+    DEBIAN_FRONTEND=noninteractive composer self-update && \
+    DEBIAN_FRONTEND=noninteractive apt-get clean -y && \
+    DEBIAN_FRONTEND=noninteractive apt-get autoremove -y && \
+    DEBIAN_FRONTEND=noninteractive apt-get autoclean -y && \
     rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/* && \
     rm /var/lib/mysql/ib_logfile*
 
