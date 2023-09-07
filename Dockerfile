@@ -50,8 +50,7 @@ RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local
 RUN DEBIAN_FRONTEND=noninteractive apt-get clean -y && \
     DEBIAN_FRONTEND=noninteractive apt-get autoremove -y && \
     DEBIAN_FRONTEND=noninteractive apt-get autoclean -y && \
-    rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/* && \
-    rm /var/lib/mysql/ib_logfile*
+    rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
 
 # RUN systemctl start redis-server && \
 #     systemctl enable redis-server
