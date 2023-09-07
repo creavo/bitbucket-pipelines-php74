@@ -8,8 +8,8 @@ ENV HOME /root
 # MySQL root password
 ARG MYSQL_ROOT_PASS=root
 
-# Cloudflare DNS
-RUN echo "nameserver 1.1.1.1" | tee /etc/resolv.conf > /dev/null
+# Cloudflare DNS, removed since docker does not allow changes of /etc/hosts and /etc/resolv.conf
+#RUN echo "nameserver 1.1.1.1" | tee /etc/resolv.conf > /dev/null
 
 # Install packages
 RUN DEBIAN_FRONTEND=noninteractive apt-get update && \
