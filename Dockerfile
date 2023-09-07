@@ -46,15 +46,6 @@ RUN DEBIAN_FRONTEND=noninteractive apt-get update && \
 # install composer
 RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer
 
-# install phive
-RUN wget -O phive.phar "https://phar.io/releases/phive.phar" && \
-    wget -O phive.phar.asc "https://phar.io/releases/phive.phar.asc" && \
-    gpg --keyserver hkps.pool.sks-keyservers.net --recv-keys 0x9D8A98B29B2D5D79 && \
-    gpg --verify phive.phar.asc phive.phar && \
-    rm phive.phar.asc && \
-    chmod +x phive.phar && \
-    mv phive.phar /usr/local/bin/phive
-
 # final clean up
 RUN DEBIAN_FRONTEND=noninteractive apt-get clean -y && \
     DEBIAN_FRONTEND=noninteractive apt-get autoremove -y && \
