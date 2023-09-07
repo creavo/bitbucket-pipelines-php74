@@ -21,14 +21,17 @@ RUN DEBIAN_FRONTEND=noninteractive apt-get update && \
     unzip \
     wget \
     curl \
+    gnupg \
     openssl \
     ssh \
     locales \
     less \
     sudo \
     mysql-server \
-    redis-server \
-    npm
+    redis-server
+
+# add node-dependency
+RUN curl -sS https://deb.nodesource.com/gpgkey/nodesource-repo.gpg.key | apt-key add - && echo "https://deb.nodesource.com/node_16.x nodistro main" | tee /etc/apt/sources.list.d/nodesource.list
 
 # add yarn-dependency
 RUN curl -sS https://dl.yarnpkg.com/debian/pubkey.gpg | apt-key add - && echo "deb https://dl.yarnpkg.com/debian/ stable main" | tee /etc/apt/sources.list.d/yarn.list
@@ -39,6 +42,7 @@ RUN DEBIAN_FRONTEND=noninteractive apt-get update && \
     DEBIAN_FRONTEND=noninteractive apt-get dist-upgrade -y && \
     DEBIAN_FRONTEND=noninteractive apt-get install -y \
     yarn \
+    nodejs \
     php-pear php7.4-mysql php7.4-zip php7.4-xml php7.4-mbstring php7.4-curl php7.4-json php7.4-pdo php7.4-tokenizer php7.4-cli php7.4-imap php7.4-intl php7.4-gd php7.4-xdebug php7.4-soap php7.4-gmp php-imagick \
     apache2 libapache2-mod-php7.4 \
     --no-install-recommends
