@@ -17,8 +17,8 @@ RUN DEBIAN_FRONTEND=noninteractive apt-get update && \
     DEBIAN_FRONTEND=noninteractive apt-get dist-upgrade -y && \
     DEBIAN_FRONTEND=noninteractive apt-get install -y \
     git \
-    unzip \
     mcrypt \
+    unzip \
     wget \
     curl \
     openssl \
